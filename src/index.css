@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  font-family: "Lora", serif;
+  font-family: "Outfit", sans-serif;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+#root {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
