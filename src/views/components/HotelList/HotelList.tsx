@@ -1,18 +1,10 @@
 import React from "react";
-import HotelCard from "../HotelCard/HotelCard";
+import HotelCard from "../SpellCard/SpellCard";
 
 import styled from "styled-components";
 
 export default function Main() {
-  return (
-    <SContainer>
-      <HotelCard />
-      <HotelCard />
-      <HotelCard />
-      <HotelCard />
-      <HotelCard />
-    </SContainer>
-  );
+  return <SContainer></SContainer>;
 }
 
 const SContainer = styled.div`

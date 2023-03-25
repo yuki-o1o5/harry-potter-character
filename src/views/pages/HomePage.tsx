@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
 import styled from "styled-components";
-
-import HotelCardSimple from "../components/HotelCardSimple/HotelCardSimple";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
+import HotelCardSimple from "../components/CharaCard/CharaCard";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import Card from "@mui/joy/Card";
+import CardCover from "@mui/joy/CardCover";
+import CardContent from "@mui/joy/CardContent";
+import Typography from "@mui/joy/Typography";
 import Modal from "@mui/material/Modal";
 
 const style = {
@@ -42,6 +40,7 @@ export default function HomePage() {
   type Charas = {
     id: string;
     gender: string;
+    wizard: boolean;
     name: string;
     actor: string;
     house: string;
@@ -59,28 +58,31 @@ export default function HomePage() {
 
   return (
     <SAllContainer>
-      <SImageContainer>
-        <ImageList
-          sx={{ width: 1000, height: 450 }}
-          variant="quilted"
-          cols={4}
-          rowHeight={222}
-        >
-          {itemData.map((item) => (
-            <ImageListItem
-              key={item.img}
-              cols={item.cols || 1}
-              rows={item.rows || 1}
-            >
-              <img
-                {...srcset(item.img, 350, item.rows, item.cols)}
-                alt={item.title}
-                loading="lazy"
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      </SImageContainer>
+      <Card component="li" sx={{ minWidth: 300, flexGrow: 1, height: 400 }}>
+        <CardCover sx={{ borderRadius: 0 }}>
+          <video
+            autoPlay
+            loop
+            muted
+            poster="https://assets.codepen.io/6093409/river.jpg"
+          >
+            <source
+              src="https://assets.codepen.io/6093409/river.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </CardCover>
+        <CardContent>
+          <Typography
+            level="h1"
+            fontWeight="lg"
+            textColor=" #C9B681"
+            mt={{ xs: 12, sm: 18 }}
+          >
+            Let's Find Your Favorite Characters
+          </Typography>
+        </CardContent>
+      </Card>
       <SHotelListContainer>
         {allCharas.map((chara, index) => {
           return (
@@ -102,15 +104,10 @@ export default function HomePage() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              {selectedChara}
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {filtered?.name}
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              {filtered?.gender}
-            </Typography>
+            <SMaindiv>{filtered?.name}</SMaindiv>
+            <Sdiv>Actor : {filtered?.actor}</Sdiv>
+            <Sdiv>House : {filtered?.house}</Sdiv>
+            <Sdiv>Gender : {filtered?.gender}</Sdiv>
           </Box>
         </Modal>
       </div>
@@ -120,46 +117,20 @@ export default function HomePage() {
 
 const SAllContainer = styled.div``;
 
-const SImageContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
 const SHotelListContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-  margin: 20px 5rem;
+  margin: 3rem 5rem;
 `;
 
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1656878564120-ab988c47f0b5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTEyfHwlRTMlODMlOUIlRTMlODIlQjAlRTMlODMlQUYlRTMlODMlQkMlRTMlODMlODR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
-    title: "Breakfast",
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: "https://images.unsplash.com/photo-1547756536-cde3673fa2e5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8JUUzJTgzJTlCJUUzJTgyJUIwJUUzJTgzJUFGJUUzJTgzJUJDJUUzJTgzJTg0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1467646208740-18124b37eb58?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=620&q=80",
-    title: "Camera",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8aGFycnklMjBwb3R0ZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=700&q=60",
-    title: "Coffee",
-    cols: 2,
-  },
-];
+const Sdiv = styled.div`
+  font-size: 2rem;
+  color: #074166;
+`;
 
-function srcset(image: string, size: number, rows = 1, cols = 1) {
-  return {
-    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-    srcSet: `${image}?w=${size * cols}&h=${
-      size * rows
-    }&fit=crop&auto=format&dpr=2 2x`,
-  };
-}
+const SMaindiv = styled.div`
+  font-size: 3rem;
+  color: #9c372a;
+`;

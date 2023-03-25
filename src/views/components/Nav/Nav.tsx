@@ -1,14 +1,15 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export default function Nav() {
+  const navigate = useNavigate();
   return (
     <SContainer>
-      <Sh1>Hotel Search app</Sh1>
-
+      <Sh1>Harry Potter</Sh1>
       <div>
         <Sul>
-          <Sli>Home</Sli>
-          <Sli>Spell Page</Sli>
+          <Sli onClick={() => navigate("/")}>Home</Sli>
+          <Sli onClick={() => navigate("/spells")}>Spell Page</Sli>
         </Sul>
       </div>
     </SContainer>
@@ -16,7 +17,7 @@ export default function Nav() {
 }
 
 const SContainer = styled.div`
-  background-color: #111;
+  background-color: #04235c;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,9 +32,11 @@ const Sul = styled.ul`
 `;
 
 const Sli = styled.li`
-  padding: 10px;
+  padding: 30px;
+  font-size: 1.7rem;
+  cursor: pointer;
 `;
 
 const Sh1 = styled.h1`
-  padding: 10px;
+  font-size: 3rem;
 `;
